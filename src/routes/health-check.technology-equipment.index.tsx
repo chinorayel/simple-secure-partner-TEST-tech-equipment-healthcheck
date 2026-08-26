@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { Nav } from "@/components/site/Nav";
 import { PCBLines } from "@/components/site/PCBLines";
-import { ArrowRight, ClipboardList } from "lucide-react";
+import { ArrowRight, Building2, ClipboardList, Mail, Phone, User } from "lucide-react";
 import {
   QUESTIONS,
   saveSubmission,
@@ -38,6 +38,9 @@ export const Route = createFileRoute("/health-check/technology-equipment/")({
 function HealthCheckForm() {
   const navigate = useNavigate();
   const [businessName, setBusinessName] = useState("");
+  const [contactName, setContactName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [answers, setAnswers] = useState<AnswerMap>({});
 
   const answered = QUESTIONS.filter((q) => {
@@ -62,10 +65,18 @@ function HealthCheckForm() {
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     saveSubmission({
-      businessName: businessName.trim() || undefined,
+      assessment: "technology-equipment",
+      businessName: businessName.trim(),
+      contactName: contactName.trim(),
+      email: email.trim(),
+      phone: phone.trim(),
       completedAt: new Date().toISOString(),
       answers,
     });
+    localStorage.setItem(
+      "sss-technology-equipment-last",
+      JSON.stringify({ businessName, contactName, email, phone, answers }),
+    );
     navigate({ to: "/health-check/technology-equipment/results" });
   };
 
@@ -93,19 +104,21 @@ function HealthCheckForm() {
 
           <form onSubmit={onSubmit} className="mt-10 space-y-5">
             <div className="rounded-2xl border border-border bg-card p-6 shadow-soft">
-              <label
-                htmlFor="businessName"
-                className="text-sm font-semibold text-navy"
-              >
-                Business name <span className="font-normal text-muted-foreground">(optional)</span>
-              </label>
-              <input
-                id="businessName"
-                value={businessName}
-                onChange={(e) => setBusinessName(e.target.value)}
-                placeholder="Your business name"
-                className="mt-3 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none focus:border-copper focus:ring-2 focus:ring-ring/30"
-              />
+              <div className="mb-5 flex items-center gap-3">
+                <Building2 className="h-5 w-5 text-copper" />
+                <div>
+                  <p className="font-semibold text-navy">Your business</p>
+                  <p className="text-xs text-muted-foreground">
+                    We'll use these details to prepare your assessment.
+                  </p>
+                </div>
+              </div>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <Field label="Business name" icon={Building2} value={businessName} onChange={setBusinessName} placeholder="Your business name" />
+                <Field label="Your name" icon={User} value={contactName} onChange={setContactName} placeholder="Your name" />
+                <Field label="Email" icon={Mail} type="email" value={email} onChange={setEmail} placeholder="you@company.com" />
+                <Field label="Phone" icon={Phone} value={phone} onChange={setPhone} placeholder="09xx xxx xxxx" />
+              </div>
             </div>
 
             {QUESTIONS.map((q, i) => (
@@ -177,5 +190,37 @@ function HealthCheckForm() {
         </div>
       </main>
     </div>
+  );
+}
+
+function Field({
+  label,
+  icon: Icon,
+  value,
+  onChange,
+  placeholder,
+  type = "text",
+}: {
+  label: string;
+  icon: typeof Building2;
+  value: string;
+  onChange: (v: string) => void;
+  placeholder: string;
+  type?: string;
+}) {
+  return (
+    <label className="block">
+      <span className="flex items-center gap-1.5 text-xs font-semibold text-navy">
+        <Icon className="h-3.5 w-3.5 text-copper" />
+        {label}
+      </span>
+      <input
+        type={type}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        className="mt-2 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm outline-none focus:border-copper focus:ring-2 focus:ring-ring/30"
+      />
+    </label>
   );
 }
