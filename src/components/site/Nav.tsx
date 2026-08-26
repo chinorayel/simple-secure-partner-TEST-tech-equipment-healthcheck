@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import type { ReactNode } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { BOOKING_URL } from "@/lib/booking";
 import logoUrl from "@/assets/sss-logo.png";
@@ -126,7 +127,7 @@ export function Nav() {
   );
 }
 
-function Dropdown({ label, children }: { label: string; children: React.ReactNode }) {
+function Dropdown({ label, children }: { label: string; children: ReactNode }) {
   return (
     <div className="group relative">
       <button
