@@ -7,6 +7,7 @@ import { BOOKING_URL } from "@/lib/booking";
 import {
   ArrowRight,
   Camera,
+  CheckCircle2,
   Cloud,
   Headphones,
   Laptop,
@@ -21,13 +22,13 @@ export const Route = createFileRoute("/technology-solutions")({
       {
         name: "description",
         content:
-          "Managed IT, network solutions, CCTV, and cloud & security support for small and growing businesses — plus a free Technology Equipment Health Check.",
+          "Managed IT, network solutions, CCTV, and cloud & security support for small and growing businesses — plus free business health assessments.",
       },
       { property: "og:title", content: "Technology Solutions | Simple Secure Solutions" },
       {
         property: "og:description",
         content:
-          "Reliable, managed technology for your business — and a free Health Check for the equipment you already have.",
+          "Reliable, managed technology for your business — with focused health assessments to help identify where you may need support.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -81,7 +82,7 @@ function TechnologySolutionsPage() {
                   href="#health-check"
                   className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-5 py-2.5 text-sm font-medium text-navy transition-colors hover:bg-secondary"
                 >
-                  Take the free Health Check
+                  Take a free Health Check
                 </a>
               </div>
             </Reveal>
@@ -118,58 +119,81 @@ function TechnologySolutionsPage() {
           </div>
         </section>
 
-        {/* TECHNOLOGY EQUIPMENT + HEALTH CHECK */}
+        {/* BUSINESS HEALTH ASSESSMENTS */}
         <section id="health-check" className="relative overflow-hidden py-20 lg:py-28">
           <PCBLines variant="divider" className="pointer-events-none absolute inset-x-0 top-0 h-10 w-full" opacity={0.5} />
           <div className="mx-auto max-w-6xl px-6 lg:px-10">
             <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
               <Reveal>
                 <div className="text-xs font-medium uppercase tracking-[0.18em] text-copper">
-                  Technology Equipment
+                  Business Health Assessments
                 </div>
                 <h2 className="mt-3 font-display text-3xl leading-[1.1] text-navy sm:text-4xl">
-                  Not sure where your equipment stands?
+                  Find the right health check for your business.
                 </h2>
                 <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground">
-                  Computer age, performance, operating systems, backups, storage, power
-                  protection, asset tracking, and technology planning — our free Health Check
-                  walks through the areas that quietly affect your business every day, and gives
-                  you a clear, practical view of where things stand.
+                  We offer multiple focused assessments, each designed to look at a different
+                  area of your business. Choose the one that best fits your current needs and
+                  get a clearer picture of where things stand and where improvements may help.
                 </p>
                 <ul className="mt-6 space-y-3 text-sm text-foreground/80">
                   <li className="flex items-start gap-2.5">
                     <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-copper" aria-hidden />
-                    Free, no-obligation, takes about 3 minutes
+                    Free, no-obligation assessments
                   </li>
                   <li className="flex items-start gap-2.5">
                     <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-copper" aria-hidden />
-                    Instant results with practical next steps
+                    Practical results and recommended next steps
                   </li>
                   <li className="flex items-start gap-2.5">
                     <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-copper" aria-hidden />
-                    Your information is kept private — see the form for details
+                    Start with the area most relevant to your business
                   </li>
                 </ul>
               </Reveal>
 
               <Reveal delay={100}>
-                <TechEquipmentHealthCheckWidget />
+                <div className="space-y-5">
+                  <TechEquipmentHealthCheckWidget />
 
-                <div className="mt-5 rounded-2xl border border-border bg-card p-5 shadow-soft">
-                  <div className="flex items-start gap-4">
-                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-copper-soft text-copper">
-                      <Network className="h-5 w-5" aria-hidden />
-                    </span>
-                    <div className="min-w-0 flex-1">
-                      <p className="text-sm font-semibold text-navy">Network & CCTV Health Check</p>
-                      <p className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground">
-                        Check your internet reliability, Wi-Fi, backup power, failover, and CCTV coverage.
+                  <div className="relative overflow-hidden rounded-3xl border border-border bg-card shadow-elevated">
+                    <div
+                      className="pointer-events-none absolute -right-32 -top-32 h-72 w-72 rounded-full opacity-40 blur-3xl"
+                      style={{ background: "radial-gradient(circle, var(--copper-soft), transparent 70%)" }}
+                      aria-hidden
+                    />
+                    <div className="relative p-6 sm:p-8 lg:p-10">
+                      <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-navy text-navy-foreground shadow-soft">
+                        <Network className="h-6 w-6" aria-hidden />
+                      </span>
+                      <h3 className="mt-5 font-display text-2xl text-navy sm:text-3xl">
+                        Network & CCTV Health Check
+                      </h3>
+                      <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-muted-foreground">
+                        Check your internet reliability, Wi-Fi, backup power, failover, and CCTV
+                        coverage. Answer at your own pace — whether you already have CCTV or are
+                        considering it, this assessment helps identify where your business may need
+                        stronger network and security foundations.
                       </p>
+                      <ul className="mt-6 space-y-2 text-sm text-foreground/80">
+                        <li className="flex items-center gap-2">
+                          <CheckCircle2 className="h-4 w-4 shrink-0 text-copper" aria-hidden />
+                          Takes about 3 minutes
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <CheckCircle2 className="h-4 w-4 shrink-0 text-copper" aria-hidden />
+                          Practical network & security results
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <CheckCircle2 className="h-4 w-4 shrink-0 text-copper" aria-hidden />
+                          No obligation
+                        </li>
+                      </ul>
                       <a
                         href="/health-check/network-cctv/"
-                        className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-navy px-4 py-2 text-sm font-medium text-navy-foreground transition-colors hover:bg-navy/90"
+                        className="mt-8 inline-flex items-center justify-center gap-1.5 rounded-full bg-navy px-6 py-3 text-sm font-medium text-navy-foreground shadow-soft transition-colors hover:bg-navy/90"
                       >
-                        Start Network & CCTV Health Check
+                        Start the Health Check
                         <ArrowRight className="h-4 w-4" aria-hidden />
                       </a>
                     </div>
