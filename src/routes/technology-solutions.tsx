@@ -154,6 +154,27 @@ function TechnologySolutionsPage() {
 
               <Reveal delay={100}>
                 <TechEquipmentHealthCheckWidget />
+
+                <div className="mt-5 rounded-2xl border border-border bg-card p-5 shadow-soft">
+                  <div className="flex items-start gap-4">
+                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-copper-soft text-copper">
+                      <Network className="h-5 w-5" aria-hidden />
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm font-semibold text-navy">Network & CCTV Health Check</p>
+                      <p className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground">
+                        Check your internet reliability, Wi-Fi, backup power, failover, and CCTV coverage.
+                      </p>
+                      <a
+                        href="/health-check/network-cctv/"
+                        className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-navy px-4 py-2 text-sm font-medium text-navy-foreground transition-colors hover:bg-navy/90"
+                      >
+                        Start Network & CCTV Health Check
+                        <ArrowRight className="h-4 w-4" aria-hidden />
+                      </a>
+                    </div>
+                  </div>
+                </div>
               </Reveal>
             </div>
           </div>
