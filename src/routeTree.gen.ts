@@ -64,10 +64,38 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/ ' extends never ? never : '/' | '/technology-solutions' | '/admin/login' | '/health-check/technology-equipment/results' | '/health-check/technology-equipment/' | '/admin/health-checks/' | '/admin/health-checks/$id' | '/health-check/network-cctv/results' | '/health-check/network-cctv/'
+  fullPaths:
+    | '/'
+    | '/technology-solutions'
+    | '/admin/login'
+    | '/health-check/technology-equipment/results'
+    | '/health-check/technology-equipment/'
+    | '/admin/health-checks/'
+    | '/admin/health-checks/$id'
+    | '/health-check/network-cctv/results'
+    | '/health-check/network-cctv/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/technology-solutions' | '/admin/login' | '/health-check/technology-equipment/results' | '/health-check/technology-equipment' | '/admin/health-checks' | '/admin/health-checks/$id' | '/health-check/network-cctv/results' | '/health-check/network-cctv'
-  id: '__root__' | '/' | '/technology-solutions' | '/admin/login' | '/health-check/technology-equipment/results' | '/health-check/technology-equipment/' | '/admin/health-checks/' | '/admin/health-checks/$id' | '/health-check/network-cctv/results' | '/health-check/network-cctv/'
+  to:
+    | '/'
+    | '/technology-solutions'
+    | '/admin/login'
+    | '/health-check/technology-equipment/results'
+    | '/health-check/technology-equipment'
+    | '/admin/health-checks'
+    | '/admin/health-checks/$id'
+    | '/health-check/network-cctv/results'
+    | '/health-check/network-cctv'
+  id:
+    | '__root__'
+    | '/'
+    | '/technology-solutions'
+    | '/admin/login'
+    | '/health-check/technology-equipment/results'
+    | '/health-check/technology-equipment/'
+    | '/admin/health-checks/'
+    | '/admin/health-checks/$id'
+    | '/health-check/network-cctv/results'
+    | '/health-check/network-cctv/'
   fileRoutesById: FileRoutesById
 }
 
@@ -85,18 +113,6 @@ declare module '@tanstack/react-router' {
   }
 }
 
-const rootRouteChildren: RootRouteChildren = {
-  IndexRoute,
-  TechnologySolutionsRoute,
-  AdminLoginRoute,
-  HealthCheckTechnologyEquipmentResultsRoute,
-  HealthCheckTechnologyEquipmentIndexRoute,
-  AdminHealthChecksIndexRoute,
-  AdminHealthChecksIdRoute,
-  HealthCheckNetworkCctvResultsRoute,
-  HealthCheckNetworkCctvIndexRoute,
-}
-
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   TechnologySolutionsRoute: typeof TechnologySolutionsRoute
@@ -107,6 +123,18 @@ export interface RootRouteChildren {
   AdminHealthChecksIdRoute: typeof AdminHealthChecksIdRoute
   HealthCheckNetworkCctvResultsRoute: typeof HealthCheckNetworkCctvResultsRoute
   HealthCheckNetworkCctvIndexRoute: typeof HealthCheckNetworkCctvIndexRoute
+}
+
+const rootRouteChildren: RootRouteChildren = {
+  IndexRoute,
+  TechnologySolutionsRoute,
+  AdminLoginRoute,
+  HealthCheckTechnologyEquipmentResultsRoute,
+  HealthCheckTechnologyEquipmentIndexRoute,
+  AdminHealthChecksIndexRoute,
+  AdminHealthChecksIdRoute,
+  HealthCheckNetworkCctvResultsRoute,
+  HealthCheckNetworkCctvIndexRoute,
 }
 
 export const routeTree = rootRouteImport._addFileChildren(rootRouteChildren)._addFileTypes<FileRouteTypes>()
