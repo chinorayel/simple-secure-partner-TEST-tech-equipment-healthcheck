@@ -244,6 +244,74 @@ function Home() {
         </div>
       </section>
 
+      {/* HEALTH CHECKS */}
+      <section id="assessments" className="relative py-20 lg:py-24 bg-background">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+          <Reveal>
+            <div className="mx-auto max-w-2xl text-center">
+              <div className="text-xs font-medium uppercase tracking-[0.18em] text-copper">
+                Business Health Assessments
+              </div>
+              <h2 className="mt-4 font-display text-4xl leading-[1.05] text-navy sm:text-5xl">
+                Find out where your business stands.
+              </h2>
+              <p className="mt-5 text-base leading-relaxed text-muted-foreground">
+                Choose an assessment to take a closer look at an important part of your business technology.
+              </p>
+            </div>
+          </Reveal>
+
+          <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2">
+            <Reveal delay={80}>
+              <Link
+                to="/health-check/technology-equipment"
+                className="group block h-full rounded-2xl border border-border bg-card p-6 shadow-soft transition-all hover:-translate-y-1 hover:shadow-elevated sm:p-8"
+              >
+                <div className="flex items-start gap-4">
+                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-copper-soft text-copper">
+                    <Laptop className="h-5 w-5" />
+                  </span>
+                  <div>
+                    <h3 className="font-display text-2xl text-navy">Technology Equipment Health Check</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                      A practical look at the computers and equipment your business relies on every day.
+                    </p>
+                    <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-navy">
+                      Take the Health Check
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            </Reveal>
+
+            <Reveal delay={140}>
+              <Link
+                to="/health-check/network-cctv"
+                className="group block h-full rounded-2xl border border-border bg-card p-6 shadow-soft transition-all hover:-translate-y-1 hover:shadow-elevated sm:p-8"
+              >
+                <div className="flex items-start gap-4">
+                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-copper-soft text-copper">
+                    <Network className="h-5 w-5" />
+                  </span>
+                  <div>
+                    <h3 className="font-display text-2xl text-navy">Network &amp; CCTV Health Check</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                      A practical look at your connectivity, network reliability, power protection and CCTV readiness.
+                    </p>
+                    <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-navy">
+                      Take the Health Check
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+
       {/* ABOUT */}
       <section id="about" className="relative py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
@@ -470,73 +538,6 @@ function Home() {
         </div>
       </section>
 
-
-      {/* HEALTH CHECKS */}
-      <section id="assessments" className="relative py-20 lg:py-24 bg-background">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <Reveal>
-            <div className="mx-auto max-w-2xl text-center">
-              <div className="text-xs font-medium uppercase tracking-[0.18em] text-copper">
-                Business Health Assessments
-              </div>
-              <h2 className="mt-4 font-display text-4xl leading-[1.05] text-navy sm:text-5xl">
-                Find out where your business stands.
-              </h2>
-              <p className="mt-5 text-base leading-relaxed text-muted-foreground">
-                Choose an assessment to take a closer look at an important part of your business technology.
-              </p>
-            </div>
-          </Reveal>
-
-          <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2">
-            <Reveal delay={80}>
-              <Link
-                to="/health-check/technology-equipment"
-                className="group block h-full rounded-2xl border border-border bg-card p-6 shadow-soft transition-all hover:-translate-y-1 hover:shadow-elevated sm:p-8"
-              >
-                <div className="flex items-start gap-4">
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-copper-soft text-copper">
-                    <Laptop className="h-5 w-5" />
-                  </span>
-                  <div>
-                    <h3 className="font-display text-2xl text-navy">Technology Equipment Health Check</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                      A practical look at the computers and equipment your business relies on every day.
-                    </p>
-                    <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-navy">
-                      Take the Health Check
-                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            </Reveal>
-
-            <Reveal delay={140}>
-              <Link
-                to="/health-check/network-cctv"
-                className="group block h-full rounded-2xl border border-border bg-card p-6 shadow-soft transition-all hover:-translate-y-1 hover:shadow-elevated sm:p-8"
-              >
-                <div className="flex items-start gap-4">
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-copper-soft text-copper">
-                    <Network className="h-5 w-5" />
-                  </span>
-                  <div>
-                    <h3 className="font-display text-2xl text-navy">Network &amp; CCTV Health Check</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                      A practical look at your connectivity, network reliability, power protection and CCTV readiness.
-                    </p>
-                    <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-navy">
-                      Take the Health Check
-                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            </Reveal>
-          </div>
-        </div>
-      </section>
 
       {/* WHY */}
       <section id="why" className="relative py-24 lg:py-32">
