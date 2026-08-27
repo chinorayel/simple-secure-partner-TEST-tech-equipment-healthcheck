@@ -4,6 +4,8 @@ import logoUrl from "@/assets/sss-logo.png";
 import { Nav } from "@/components/site/Nav";
 import { Reveal } from "@/components/site/Reveal";
 import { PCBLines } from "@/components/site/PCBLines";
+import { TechEquipmentHealthCheckWidget } from "@/components/health-check/TechEquipmentHealthCheckWidget";
+import { NetworkCctvHealthCheckWidget } from "@/components/health-check/NetworkCctvHealthCheckWidget";
 import heroTeam from "@/assets/hero-team.jpg";
 import aboutPartnership from "@/assets/about-partnership.jpg";
 import teamExpertise from "@/assets/team-expertise.jpg";
@@ -253,64 +255,24 @@ function Home() {
                 Business Health Assessments
               </div>
               <h2 className="mt-4 font-display text-4xl leading-[1.05] text-navy sm:text-5xl">
-                Find out where your business stands.
+                Find the right health check for your business.
               </h2>
               <p className="mt-5 text-base leading-relaxed text-muted-foreground">
-                Choose an assessment to take a closer look at an important part of your business technology.
+                Take a quick, practical look at an important part of your business. Your results can help you see where things stand and where improvements may help.
               </p>
             </div>
           </Reveal>
 
-          <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2">
+          <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-2">
             <Reveal delay={80}>
-              <Link
-                to="/health-check/technology-equipment"
-                className="group block h-full rounded-2xl border border-border bg-card p-6 shadow-soft transition-all hover:-translate-y-1 hover:shadow-elevated sm:p-8"
-              >
-                <div className="flex items-start gap-4">
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-copper-soft text-copper">
-                    <Laptop className="h-5 w-5" />
-                  </span>
-                  <div>
-                    <h3 className="font-display text-2xl text-navy">Technology Equipment Health Check</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                      A practical look at the computers and equipment your business relies on every day.
-                    </p>
-                    <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-navy">
-                      Take the Health Check
-                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </span>
-                  </div>
-                </div>
-              </Link>
+              <TechEquipmentHealthCheckWidget />
             </Reveal>
-
             <Reveal delay={140}>
-              <Link
-                to="/health-check/network-cctv"
-                className="group block h-full rounded-2xl border border-border bg-card p-6 shadow-soft transition-all hover:-translate-y-1 hover:shadow-elevated sm:p-8"
-              >
-                <div className="flex items-start gap-4">
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-copper-soft text-copper">
-                    <Network className="h-5 w-5" />
-                  </span>
-                  <div>
-                    <h3 className="font-display text-2xl text-navy">Network &amp; CCTV Health Check</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                      A practical look at your connectivity, network reliability, power protection and CCTV readiness.
-                    </p>
-                    <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-navy">
-                      Take the Health Check
-                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </span>
-                  </div>
-                </div>
-              </Link>
+              <NetworkCctvHealthCheckWidget />
             </Reveal>
           </div>
         </div>
       </section>
-
 
       {/* ABOUT */}
       <section id="about" className="relative py-24 lg:py-32">
