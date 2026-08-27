@@ -10,7 +10,6 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TechnologySolutionsRouteImport } from './routes/technology-solutions'
-import { Route as AssessmentsRouteImport } from './routes/assessments'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as HealthCheckTechnologyEquipmentIndexRouteImport } from './routes/health-check.technology-equipment.index'
 import { Route as HealthCheckTechnologyEquipmentResultsRouteImport } from './routes/health-check.technology-equipment.results'
@@ -21,7 +20,6 @@ import { Route as HealthCheckNetworkCctvResultsRouteImport } from './routes/heal
 
 const IndexRoute = IndexRouteImport.update({ id: '/', path: '/', getParentRoute: () => rootRouteImport } as any)
 const TechnologySolutionsRoute = TechnologySolutionsRouteImport.update({ id: '/technology-solutions', path: '/technology-solutions', getParentRoute: () => rootRouteImport } as any)
-const AssessmentsRoute = AssessmentsRouteImport.update({ id: '/assessments', path: '/assessments', getParentRoute: () => rootRouteImport } as any)
 const AdminLoginRoute = AdminLoginRouteImport.update({ id: '/admin/login', path: '/admin/login', getParentRoute: () => rootRouteImport } as any)
 const HealthCheckTechnologyEquipmentIndexRoute = HealthCheckTechnologyEquipmentIndexRouteImport.update({ id: '/health-check/technology-equipment/', path: '/health-check/technology-equipment/', getParentRoute: () => rootRouteImport } as any)
 const HealthCheckTechnologyEquipmentResultsRoute = HealthCheckTechnologyEquipmentResultsRouteImport.update({ id: '/health-check/technology-equipment/results', path: '/health-check/technology-equipment/results', getParentRoute: () => rootRouteImport } as any)
@@ -33,7 +31,6 @@ const HealthCheckNetworkCctvResultsRoute = HealthCheckNetworkCctvResultsRouteImp
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/technology-solutions': typeof TechnologySolutionsRoute
-  '/assessments': typeof AssessmentsRoute
   '/admin/login': typeof AdminLoginRoute
   '/health-check/technology-equipment/results': typeof HealthCheckTechnologyEquipmentResultsRoute
   '/health-check/technology-equipment/': typeof HealthCheckTechnologyEquipmentIndexRoute
@@ -45,7 +42,6 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/technology-solutions': typeof TechnologySolutionsRoute
-  '/assessments': typeof AssessmentsRoute
   '/admin/login': typeof AdminLoginRoute
   '/health-check/technology-equipment/results': typeof HealthCheckTechnologyEquipmentResultsRoute
   '/health-check/technology-equipment': typeof HealthCheckTechnologyEquipmentIndexRoute
@@ -58,7 +54,6 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/technology-solutions': typeof TechnologySolutionsRoute
-  '/assessments': typeof AssessmentsRoute
   '/admin/login': typeof AdminLoginRoute
   '/health-check/technology-equipment/results': typeof HealthCheckTechnologyEquipmentResultsRoute
   '/health-check/technology-equipment/': typeof HealthCheckTechnologyEquipmentIndexRoute
@@ -72,7 +67,6 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/technology-solutions'
-    | '/assessments'
     | '/admin/login'
     | '/health-check/technology-equipment/results'
     | '/health-check/technology-equipment/'
@@ -84,7 +78,6 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/technology-solutions'
-    | '/assessments'
     | '/admin/login'
     | '/health-check/technology-equipment/results'
     | '/health-check/technology-equipment'
@@ -96,7 +89,6 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/technology-solutions'
-    | '/assessments'
     | '/admin/login'
     | '/health-check/technology-equipment/results'
     | '/health-check/technology-equipment/'
@@ -111,7 +103,6 @@ declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/': { id: '/'; path: '/'; fullPath: '/'; preLoaderRoute: typeof IndexRouteImport; parentRoute: typeof rootRouteImport }
     '/technology-solutions': { id: '/technology-solutions'; path: '/technology-solutions'; fullPath: '/technology-solutions'; preLoaderRoute: typeof TechnologySolutionsRouteImport; parentRoute: typeof rootRouteImport }
-    '/assessments': { id: '/assessments'; path: '/assessments'; fullPath: '/assessments'; preLoaderRoute: typeof AssessmentsRouteImport; parentRoute: typeof rootRouteImport }
     '/admin/login': { id: '/admin/login'; path: '/admin/login'; fullPath: '/admin/login'; preLoaderRoute: typeof AdminLoginRouteImport; parentRoute: typeof rootRouteImport }
     '/health-check/technology-equipment/': { id: '/health-check/technology-equipment/'; path: '/health-check/technology-equipment'; fullPath: '/health-check/technology-equipment/'; preLoaderRoute: typeof HealthCheckTechnologyEquipmentIndexRouteImport; parentRoute: typeof rootRouteImport }
     '/health-check/technology-equipment/results': { id: '/health-check/technology-equipment/results'; path: '/health-check/technology-equipment/results'; fullPath: '/health-check/technology-equipment/results'; preLoaderRoute: typeof HealthCheckTechnologyEquipmentResultsRouteImport; parentRoute: typeof rootRouteImport }
@@ -125,7 +116,6 @@ declare module '@tanstack/react-router' {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   TechnologySolutionsRoute: typeof TechnologySolutionsRoute
-  AssessmentsRoute: typeof AssessmentsRoute
   AdminLoginRoute: typeof AdminLoginRoute
   HealthCheckTechnologyEquipmentResultsRoute: typeof HealthCheckTechnologyEquipmentResultsRoute
   HealthCheckTechnologyEquipmentIndexRoute: typeof HealthCheckTechnologyEquipmentIndexRoute
@@ -138,7 +128,6 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute,
   TechnologySolutionsRoute,
-  AssessmentsRoute,
   AdminLoginRoute,
   HealthCheckTechnologyEquipmentResultsRoute,
   HealthCheckTechnologyEquipmentIndexRoute,
