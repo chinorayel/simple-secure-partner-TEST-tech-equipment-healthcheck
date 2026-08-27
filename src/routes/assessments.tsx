@@ -45,7 +45,7 @@ function AssessmentsPage() {
           </div>
         </section>
 
-        <section className="relative overflow-hidden border-t border-border bg-surface py-16 lg:py-24">
+        <section id="health-check" className="relative overflow-hidden border-t border-border bg-surface py-16 lg:py-24">
           <PCBLines variant="divider" className="pointer-events-none absolute inset-x-0 top-0 h-10 w-full" opacity={0.5} />
           <div className="mx-auto max-w-6xl px-5 sm:px-6 lg:px-10">
             <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start lg:gap-12">
