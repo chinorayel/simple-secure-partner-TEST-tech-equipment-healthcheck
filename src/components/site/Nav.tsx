@@ -21,13 +21,6 @@ const solutionLinks = [
   { href: "/technology-solutions", label: "Technology Solutions", route: true },
 ];
 
-const assessmentLinks = [
-  { href: "/health-check/technology-equipment", label: "Technology Equipment Health Check", route: true },
-  { href: "/health-check/network-cctv", label: "Network & CCTV Health Check", route: true },
-  { label: "Marketing Health Check", comingSoon: true },
-  { label: "Business Operations Health Check", comingSoon: true },
-];
-
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -92,23 +85,13 @@ export function Nav() {
             )}
           </Dropdown>
 
-          <Dropdown label="Assessments">
-            {assessmentLinks.map((item) =>
-              item.comingSoon ? (
-                <span
-                  key={item.label}
-                  className="flex items-center justify-between rounded-xl px-4 py-2.5 text-sm text-muted-foreground/60"
-                >
-                  {item.label}
-                  <span className="ml-4 whitespace-nowrap text-[10px] font-medium uppercase tracking-wider text-muted-foreground/50">
-                    Coming soon
-                  </span>
-                </span>
-              ) : (
-                <DropdownLink key={item.href} to={item.href!} label={item.label} />
-              ),
-            )}
-          </Dropdown>
+          <Link
+            to="/assessments"
+            className="rounded-full px-4 py-2 text-sm text-foreground/70 hover:text-navy hover:bg-secondary transition-colors"
+            activeProps={{ className: "rounded-full px-4 py-2 text-sm text-navy bg-secondary" }}
+          >
+            Assessments
+          </Link>
 
           <a
             href={homeHref(primaryLinks[1].href)}
