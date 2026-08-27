@@ -30,6 +30,7 @@ const assessmentLinks = [
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const onHome = pathname === "/";
 
@@ -39,6 +40,10 @@ export function Nav() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
 
   const homeHref = (href: string) => (onHome ? href : `/${href}`);
 
@@ -113,17 +118,64 @@ export function Nav() {
           </a>
         </nav>
 
-        <a
-          href={BOOKING_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 rounded-full bg-navy px-4 py-2 text-sm font-medium text-navy-foreground shadow-soft hover:bg-navy/90 transition-colors"
-        >
-          Book a Business Consultation
-          <span aria-hidden>→</span>
-        </a>
+        <div className="flex items-center gap-2">
+          <a
+            href={BOOKING_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-navy px-4 py-2 text-sm font-medium text-navy-foreground shadow-soft hover:bg-navy/90 transition-colors"
+          >
+            Book a Business Consultation
+            <span aria-hidden>→</span>
+          </a>
+          <button
+            type="button"
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
+            onClick={() => setMobileOpen((open) => !open)}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card text-navy shadow-soft md:hidden"
+          >
+            <span className="text-xl leading-none" aria-hidden>{mobileOpen ? "×" : "☰"}</span>
+          </button>
+        </div>
       </div>
+
+      {mobileOpen && (
+        <div className="border-t border-border/60 bg-background/95 px-6 pb-6 pt-3 shadow-soft backdrop-blur-md md:hidden">
+          <nav className="mx-auto max-w-7xl space-y-1">
+            <MobileAnchor href={homeHref("#top")} label="Home" />
+            <MobileAnchor href={homeHref("#about")} label="About" />
+            <MobileAnchor href={homeHref("#solutions")} label="Solutions" />
+            <Link
+              to="/assessments"
+              className="block rounded-xl bg-copper-soft/60 px-4 py-3 text-sm font-semibold text-navy"
+            >
+              Assessments
+            </Link>
+            <MobileAnchor href={homeHref("#contact")} label="Contact" />
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 inline-flex w-full items-center justify-center rounded-full bg-navy px-5 py-3 text-sm font-medium text-navy-foreground shadow-soft"
+            >
+              Book a Business Consultation →
+            </a>
+          </nav>
+        </div>
+      )}
     </header>
+  );
+}
+
+function MobileAnchor({ href, label }: { href: string; label: string }) {
+  return (
+    <a
+      href={href}
+      className="block rounded-xl px-4 py-3 text-sm font-medium text-foreground/80 transition-colors hover:bg-secondary hover:text-navy"
+    >
+      {label}
+    </a>
   );
 }
 
