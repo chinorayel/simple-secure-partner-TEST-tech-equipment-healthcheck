@@ -6,6 +6,7 @@ import { Reveal } from "@/components/site/Reveal";
 import { PCBLines } from "@/components/site/PCBLines";
 import { TechEquipmentHealthCheckWidget } from "@/components/health-check/TechEquipmentHealthCheckWidget";
 import { NetworkCctvHealthCheckWidget } from "@/components/health-check/NetworkCctvHealthCheckWidget";
+import { BusinessOperationsHealthCheckWidget } from "@/components/health-check/BusinessOperationsHealthCheckWidget";
 import heroTeam from "@/assets/hero-team.jpg";
 import aboutPartnership from "@/assets/about-partnership.jpg";
 import teamExpertise from "@/assets/team-expertise.jpg";
@@ -265,10 +266,28 @@ function Home() {
 
           <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-2">
             <Reveal delay={80}>
-              <TechEquipmentHealthCheckWidget />
+              <div className="space-y-6">
+                <TechEquipmentHealthCheckWidget />
+                <BusinessOperationsHealthCheckWidget />
+              </div>
             </Reveal>
             <Reveal delay={140}>
-              <NetworkCctvHealthCheckWidget />
+              <div className="space-y-6">
+                <NetworkCctvHealthCheckWidget />
+                <div className="rounded-3xl border border-border bg-card p-7 shadow-soft sm:p-8">
+                  <div className="flex items-start gap-4">
+                    <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-secondary text-muted-foreground">
+                      <ClipboardList className="h-6 w-6" aria-hidden />
+                    </span>
+                    <div>
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">Marketing</p>
+                      <h3 className="mt-1 font-display text-2xl text-navy">Marketing Health Check</h3>
+                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Assess your marketing presence, online assets, branding, and customer-facing visibility. We are preparing this assessment now.</p>
+                      <span className="mt-5 inline-flex rounded-full bg-secondary px-3 py-1 text-xs font-medium text-muted-foreground">Coming soon</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </Reveal>
           </div>
         </div>
@@ -355,151 +374,58 @@ function Home() {
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <Reveal>
             <div className="mx-auto max-w-2xl text-center">
-              <div className="text-xs font-medium uppercase tracking-[0.18em] text-copper">
-                Our Solutions
-              </div>
-              <h2 className="mt-4 font-display text-5xl leading-[1.05] text-navy lg:text-6xl">
-                Two pillars. One partner.
-              </h2>
-              <p className="mt-5 text-base text-muted-foreground">
-                Reliable technology and professional business support — designed to work together.
-              </p>
+              <div className="text-xs font-medium uppercase tracking-[0.18em] text-copper">Our Solutions</div>
+              <h2 className="mt-4 font-display text-5xl leading-[1.05] text-navy lg:text-6xl">Two pillars. <span className="text-copper">One partner.</span></h2>
+              <p className="mt-5 text-base leading-relaxed text-muted-foreground">Technology Solutions and Business Support Services, brought together under one trusted relationship.</p>
             </div>
           </Reveal>
-
-          <div className="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-2">
-            {/* Tech card */}
+          <div className="mt-16 grid grid-cols-1 gap-6 lg:grid-cols-2">
             <Reveal delay={80}>
-              <div className="group relative h-full overflow-hidden rounded-3xl border border-border bg-card shadow-soft transition-all hover:shadow-elevated hover:-translate-y-1">
-                <div className="relative h-52 w-full overflow-hidden">
-                  <img
-                    src={solutionsTechnology}
-                    alt="Diverse team collaborating around a laptop in a bright office"
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                    loading="lazy"
-                    width={1200}
-                    height={900}
-                  />
-                  <div
-                    className="pointer-events-none absolute inset-0"
-                    style={{
-                      background:
-                        "linear-gradient(180deg, rgba(13,27,42,0.05) 0%, rgba(13,27,42,0.35) 100%)",
-                    }}
-                    aria-hidden
-                  />
-                  <div
-                    className="pointer-events-none absolute inset-0 mix-blend-soft-light opacity-70"
-                    style={{
-                      background:
-                        "radial-gradient(circle at 85% 100%, var(--copper-soft), transparent 60%)",
-                    }}
-                    aria-hidden
-                  />
-                </div>
-                <div className="relative p-10">
-                  <div
-                    className="absolute -right-24 -top-24 h-64 w-64 rounded-full opacity-40 blur-3xl transition-opacity group-hover:opacity-60"
-                    style={{ background: "radial-gradient(circle, var(--copper-soft), transparent 70%)" }}
-                    aria-hidden
-                  />
-                  <div className="relative">
-                    <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-navy text-navy-foreground shadow-soft">
-                      <Laptop className="h-5 w-5" />
-                    </span>
-                    <h3 className="mt-6 font-display text-3xl text-navy">Technology Solutions</h3>
-                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                      Managed, monitored, and supported — so your systems quietly do their job.
-                    </p>
-                    <ul className="mt-8 space-y-3">
-                      {techServices.map((s) => (
-                        <li
-                          key={s.label}
-                          className="flex items-center gap-3 rounded-xl border border-transparent px-3 py-2.5 transition-colors hover:border-border hover:bg-secondary"
-                        >
-                          <span className="grid h-8 w-8 place-items-center rounded-lg bg-copper-soft text-copper">
-                            <s.icon className="h-4 w-4" />
-                          </span>
-                          <span className="text-sm font-medium text-foreground">{s.label}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <Link
-                      to="/technology-solutions"
-                      className="mt-8 inline-flex items-center gap-1.5 rounded-full bg-navy px-5 py-2.5 text-sm font-medium text-navy-foreground shadow-soft transition-colors hover:bg-navy/90"
-                    >
-                      Explore Technology Solutions
-                      <ArrowRight className="h-4 w-4" aria-hidden />
-                    </Link>
+              <div className="group relative h-full overflow-hidden rounded-[2rem] border border-border bg-card shadow-soft transition-all hover:-translate-y-1 hover:shadow-elevated">
+                <img src={solutionsTechnology} alt="Modern office technology and workspace" className="h-64 w-full object-cover" loading="lazy" width={1280} height={720} />
+                <div className="p-8 lg:p-10">
+                  <div className="text-xs font-medium uppercase tracking-[0.18em] text-copper">Technology Solutions</div>
+                  <h3 className="mt-3 font-display text-3xl text-navy">Reliable technology. Quietly managed.</h3>
+                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground">Managed IT, networking, CCTV, cloud, security, and technology support that keeps your business moving.</p>
+                  <div className="mt-7 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+                    {techServices.map((s) => <div key={s.label} className="flex items-center gap-2.5 text-sm text-foreground/80"><span className="grid h-8 w-8 place-items-center rounded-lg bg-copper-soft text-copper"><s.icon className="h-4 w-4" /></span>{s.label}</div>)}
                   </div>
+                  <Link to="/technology-solutions" className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-navy hover:text-copper transition-colors">Explore Technology Solutions <ArrowRight className="h-4 w-4" /></Link>
                 </div>
               </div>
             </Reveal>
-
-            {/* Biz card */}
-            <Reveal delay={160}>
-              <div className="group relative h-full overflow-hidden rounded-3xl border border-border bg-card shadow-soft transition-all hover:shadow-elevated hover:-translate-y-1">
-                <div className="relative h-52 w-full overflow-hidden">
-                  <img
-                    src={solutionsSupport}
-                    alt="Professional customer support specialist smiling while assisting a client"
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                    loading="lazy"
-                    width={1200}
-                    height={900}
-                  />
-                  <div
-                    className="pointer-events-none absolute inset-0"
-                    style={{
-                      background:
-                        "linear-gradient(180deg, rgba(13,27,42,0.05) 0%, rgba(13,27,42,0.35) 100%)",
-                    }}
-                    aria-hidden
-                  />
-                  <div
-                    className="pointer-events-none absolute inset-0 mix-blend-soft-light opacity-70"
-                    style={{
-                      background:
-                        "radial-gradient(circle at 15% 100%, var(--copper-soft), transparent 60%)",
-                    }}
-                    aria-hidden
-                  />
-                </div>
-                <div className="relative p-10">
-                  <div
-                    className="absolute -right-24 -top-24 h-64 w-64 rounded-full opacity-40 blur-3xl transition-opacity group-hover:opacity-60"
-                    style={{ background: "radial-gradient(circle, var(--copper-soft), transparent 70%)" }}
-                    aria-hidden
-                  />
-                  <div className="relative">
-                    <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-copper text-copper-foreground shadow-copper">
-                      <Headphones className="h-5 w-5" />
-                    </span>
-                    <h3 className="mt-6 font-display text-3xl text-navy">Business Support Solutions</h3>
-                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                      Professional people supporting your customers, calendar, and back office.
-                    </p>
-                    <ul className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2">
-                      {bizServices.map((s) => (
-                        <li
-                          key={s.label}
-                          className="flex items-center gap-3 rounded-xl border border-transparent px-3 py-2.5 transition-colors hover:border-border hover:bg-secondary"
-                        >
-                          <span className="grid h-8 w-8 place-items-center rounded-lg bg-copper-soft text-copper">
-                            <s.icon className="h-4 w-4" />
-                          </span>
-                          <span className="text-sm font-medium text-foreground">{s.label}</span>
-                        </li>
-                      ))}
-                    </ul>
+            <Reveal delay={140}>
+              <div className="group relative h-full overflow-hidden rounded-[2rem] border border-border bg-card shadow-soft transition-all hover:-translate-y-1 hover:shadow-elevated">
+                <img src={solutionsSupport} alt="Business support professionals collaborating" className="h-64 w-full object-cover" loading="lazy" width={1280} height={720} />
+                <div className="p-8 lg:p-10">
+                  <div className="text-xs font-medium uppercase tracking-[0.18em] text-copper">Business Support Services</div>
+                  <h3 className="mt-3 font-display text-3xl text-navy">The work behind the work.</h3>
+                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground">Customer-facing and back-office support that gives you more time to focus on customers, products, and growth.</p>
+                  <div className="mt-7 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+                    {bizServices.map((s) => <div key={s.label} className="flex items-center gap-2.5 text-sm text-foreground/80"><span className="grid h-8 w-8 place-items-center rounded-lg bg-copper-soft text-copper"><s.icon className="h-4 w-4" /></span>{s.label}</div>)}
                   </div>
+                  <a href="#contact" className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-navy hover:text-copper transition-colors">Talk about your operations <ArrowRight className="h-4 w-4" /></a>
                 </div>
               </div>
             </Reveal>
           </div>
+
+          <Reveal delay={120}>
+            <div className="relative mt-16 overflow-hidden rounded-[1.5rem] bg-navy px-8 py-12 text-center shadow-elevated sm:px-12 lg:mt-20">
+              <PCBLines
+                variant="corner"
+                className="absolute inset-0 h-full w-full pointer-events-none"
+                opacity={0.35}
+              />
+              <p className="relative mx-auto max-w-3xl font-display text-2xl leading-[1.25] text-navy-foreground sm:text-3xl lg:text-4xl">
+                Different expertise.{" "}
+                <span className="text-copper">One team.</span>{" "}
+                Focused on helping your business move forward.
+              </p>
+            </div>
+          </Reveal>
         </div>
       </section>
-
 
       {/* WHY */}
       <section id="why" className="relative py-24 lg:py-32">
@@ -538,87 +464,6 @@ function Home() {
           </div>
         </div>
       </section>
-
-      {/* TEAM */}
-      <section id="team" className="relative py-24 lg:py-32 overflow-hidden">
-        <PCBLines variant="divider" className="absolute inset-x-0 top-0 h-10 w-full pointer-events-none" opacity={0.5} />
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-6">
-              <Reveal>
-                <div className="text-xs font-medium uppercase tracking-[0.18em] text-copper">
-                  Our Team
-                </div>
-                <h2 className="mt-4 font-display text-4xl leading-[1.08] text-navy sm:text-5xl lg:text-6xl">
-                  Meet Our Team of Experts
-                </h2>
-              </Reveal>
-              <Reveal delay={100}>
-                <p className="mt-8 text-lg leading-relaxed text-foreground/85">
-                  At Simple Secure Solutions, we bring together a team of professionals with
-                  diverse backgrounds, experience, and areas of expertise.
-                </p>
-                <p className="mt-5 text-base leading-relaxed text-muted-foreground">
-                  We understand that every business is different. That's why our team takes the
-                  time to understand your goals, challenges, and unique requirements before
-                  recommending the right solution.
-                </p>
-                <p className="mt-5 text-base leading-relaxed text-muted-foreground">
-                  From technology and security to business operations and digital solutions, our
-                  combined knowledge allows us to look at challenges from different perspectives
-                  and deliver practical solutions that support your business.
-                </p>
-              </Reveal>
-            </div>
-
-            <div className="lg:col-span-6">
-              <Reveal delay={160}>
-                <div className="relative">
-                  <div
-                    className="absolute -inset-4 rounded-[2rem] opacity-40 blur-2xl"
-                    style={{ background: "radial-gradient(circle at 65% 35%, var(--copper-soft), transparent 65%)" }}
-                    aria-hidden
-                  />
-                  <div className="relative overflow-hidden rounded-[1.5rem] border border-border bg-card shadow-soft">
-                    <img
-                      src={teamExpertise}
-                      alt="Abstract network of connected hexagons and circuit traces representing multidisciplinary expertise"
-                      className="h-auto w-full object-cover"
-                      loading="lazy"
-                      width={1280}
-                      height={960}
-                    />
-                    <div
-                      className="pointer-events-none absolute inset-0 mix-blend-soft-light opacity-50"
-                      style={{
-                        background:
-                          "linear-gradient(135deg, rgba(13,27,42,0.14), transparent 60%), radial-gradient(circle at 15% 100%, var(--copper-soft), transparent 60%)",
-                      }}
-                      aria-hidden
-                    />
-                  </div>
-                </div>
-              </Reveal>
-            </div>
-          </div>
-
-          <Reveal delay={120}>
-            <div className="relative mt-16 overflow-hidden rounded-[1.5rem] bg-navy px-8 py-12 text-center shadow-elevated sm:px-12 lg:mt-20">
-              <PCBLines
-                variant="corner"
-                className="absolute inset-0 h-full w-full pointer-events-none"
-                opacity={0.35}
-              />
-              <p className="relative mx-auto max-w-3xl font-display text-2xl leading-[1.25] text-navy-foreground sm:text-3xl lg:text-4xl">
-                Different expertise.{" "}
-                <span className="text-copper">One team.</span>{" "}
-                Focused on helping your business move forward.
-              </p>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
 
       {/* INDUSTRIES */}
       <section id="industries" className="relative py-24 lg:py-32 bg-surface overflow-hidden">
