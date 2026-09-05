@@ -3,6 +3,7 @@ import { useMemo } from "react";
 import { ArrowLeft, CheckCircle2, CircleAlert, ShieldCheck, Wifi } from "lucide-react";
 import { Nav } from "@/components/site/Nav";
 import { PCBLines } from "@/components/site/PCBLines";
+import { BOOKING_URL } from "@/lib/booking";
 import { calculateResult, type AnswerMap } from "@/lib/health-check/network-cctv";
 
 export const Route = createFileRoute("/health-check/network-cctv/results")({
