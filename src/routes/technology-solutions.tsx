@@ -1,11 +1,11 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Nav } from "@/components/site/Nav";
 import { PCBLines } from "@/components/site/PCBLines";
 import { Reveal } from "@/components/site/Reveal";
 import { TechEquipmentHealthCheckWidget } from "@/components/health-check/TechEquipmentHealthCheckWidget";
 import { NetworkCctvHealthCheckWidget } from "@/components/health-check/NetworkCctvHealthCheckWidget";
 import { BOOKING_URL } from "@/lib/booking";
-import { ArrowRight, Camera, Cloud, Headphones, Laptop, Network, ShieldCheck } from "lucide-react";
+import { ArrowRight, Camera, ClipboardCheck, Cloud, Headphones, Laptop, Network, ShieldCheck } from "lucide-react";
 
 export const Route = createFileRoute("/technology-solutions")({
   head: () => ({
@@ -77,6 +77,22 @@ function TechnologySolutionsPage() {
                 <div className="space-y-5">
                   <TechEquipmentHealthCheckWidget />
                   <NetworkCctvHealthCheckWidget />
+                  <div className="rounded-3xl border border-border bg-card p-7 shadow-soft sm:p-8">
+                    <div className="flex items-start gap-4">
+                      <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-copper-soft text-copper"><ClipboardCheck className="h-6 w-6" aria-hidden /></span>
+                      <div>
+                        <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-copper">Business Operations</p>
+                        <h3 className="mt-1 font-display text-2xl text-navy">Business Operations Health Check</h3>
+                        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Look at day-to-day tasks, workflow bottlenecks, documentation, customer enquiries, repetitive work and opportunities to delegate operational support.</p>
+                        <div className="mt-5 flex flex-wrap gap-2">
+                          <span className="rounded-full bg-secondary px-3 py-1 text-xs text-navy">11 quick questions</span>
+                          <span className="rounded-full bg-secondary px-3 py-1 text-xs text-navy">Instant results</span>
+                          <span className="rounded-full bg-secondary px-3 py-1 text-xs text-navy">No obligation</span>
+                        </div>
+                        <Link to="/health-check/business-operations" className="mt-6 inline-flex items-center gap-1.5 rounded-full bg-navy px-5 py-2.5 text-sm font-medium text-navy-foreground shadow-soft transition-colors hover:bg-navy/90">Start Business Operations Health Check<ArrowRight className="h-4 w-4" aria-hidden /></Link>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </Reveal>
             </div>
