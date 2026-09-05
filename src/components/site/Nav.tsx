@@ -26,7 +26,7 @@ const assessmentLinks = [
   { href: "/health-check/technology-equipment", label: "Technology Equipment Health Check", route: true },
   { href: "/health-check/network-cctv", label: "Network & CCTV Health Check", route: true },
   { label: "Marketing Health Check", comingSoon: true },
-  { label: "Business Operations Health Check", comingSoon: true },
+  { href: "/health-check/business-operations", label: "Business Operations Health Check", route: true },
 ];
 
 export function Nav() {
