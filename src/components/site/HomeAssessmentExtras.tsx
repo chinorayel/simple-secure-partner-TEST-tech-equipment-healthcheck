@@ -1,16 +1,21 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
+import { useRouterState } from "@tanstack/react-router";
 import { ClipboardList } from "lucide-react";
 import { BusinessOperationsHealthCheckWidget } from "@/components/health-check/BusinessOperationsHealthCheckWidget";
 
 export function HomeAssessmentExtras() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
   const [target, setTarget] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
-    if (window.location.pathname !== "/") return;
+    if (pathname !== "/") {
+      setTarget(null);
+      return;
+    }
     const grid = document.querySelector<HTMLElement>("#assessments .mt-10.grid");
     setTarget(grid);
-  }, []);
+  }, [pathname]);
 
   if (!target) return null;
 
