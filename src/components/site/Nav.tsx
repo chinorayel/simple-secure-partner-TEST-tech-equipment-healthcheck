@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { BOOKING_URL } from "@/lib/booking";
 import logoUrl from "@/assets/sss-logo.png";
+import { HomeAssessmentExtras } from "@/components/site/HomeAssessmentExtras";
 import { Menu, X } from "lucide-react";
 
 const primaryLinks = [
@@ -46,112 +47,115 @@ export function Nav() {
   const closeMobile = () => setMobileOpen(false);
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "backdrop-blur-md bg-background/80 border-b border-border/60"
-          : "bg-transparent"
-      }`}
-    >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
-        <a href={onHome ? "#top" : "/#top"} className="flex items-center gap-2.5 group">
-          <img
-            src={logoUrl}
-            alt="Simple Secure Solutions"
-            className="h-10 w-10 object-contain transition-transform group-hover:scale-105"
-          />
-          <span className="flex flex-col leading-tight">
-            <span className="text-[13px] font-semibold text-navy tracking-tight sm:text-sm">Simple Secure Solutions</span>
-            <span className="hidden sm:block text-[11px] text-muted-foreground uppercase tracking-[0.14em]">Business Operations Partner</span>
-          </span>
-        </a>
-
-        <nav className="hidden md:flex items-center gap-1">
-          <a
-            href={homeHref(primaryLinks[0].href)}
-            className="rounded-full px-4 py-2 text-sm text-foreground/70 hover:text-navy hover:bg-secondary transition-colors"
-          >
-            Home
+    <>
+      <header
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+          scrolled
+            ? "backdrop-blur-md bg-background/80 border-b border-border/60"
+            : "bg-transparent"
+        }`}
+      >
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
+          <a href={onHome ? "#top" : "/#top"} className="flex items-center gap-2.5 group">
+            <img
+              src={logoUrl}
+              alt="Simple Secure Solutions"
+              className="h-10 w-10 object-contain transition-transform group-hover:scale-105"
+            />
+            <span className="flex flex-col leading-tight">
+              <span className="text-[13px] font-semibold text-navy tracking-tight sm:text-sm">Simple Secure Solutions</span>
+              <span className="hidden sm:block text-[11px] text-muted-foreground uppercase tracking-[0.14em]">Business Operations Partner</span>
+            </span>
           </a>
 
-          <Dropdown label="About">
-            {aboutLinks.map((item) => (
-              <DropdownAnchor key={item.href} href={homeHref(item.href)} label={item.label} />
-            ))}
-          </Dropdown>
+          <nav className="hidden md:flex items-center gap-1">
+            <a
+              href={homeHref(primaryLinks[0].href)}
+              className="rounded-full px-4 py-2 text-sm text-foreground/70 hover:text-navy hover:bg-secondary transition-colors"
+            >
+              Home
+            </a>
 
-          <Dropdown label="Solutions">
-            {solutionLinks.map((item) =>
-              item.route ? (
-                <DropdownLink key={item.href} to={item.href} label={item.label} />
-              ) : (
+            <Dropdown label="About">
+              {aboutLinks.map((item) => (
                 <DropdownAnchor key={item.href} href={homeHref(item.href)} label={item.label} />
-              ),
-            )}
-          </Dropdown>
+              ))}
+            </Dropdown>
 
-          <Dropdown label="Assessments">
-            {assessmentLinks.map((item) =>
-              item.comingSoon ? (
-                <span
-                  key={item.label}
-                  className="flex items-center justify-between rounded-xl px-4 py-2.5 text-sm text-muted-foreground/60"
-                >
-                  {item.label}
-                  <span className="ml-4 whitespace-nowrap text-[10px] font-medium uppercase tracking-wider text-muted-foreground/50">
-                    Coming soon
+            <Dropdown label="Solutions">
+              {solutionLinks.map((item) =>
+                item.route ? (
+                  <DropdownLink key={item.href} to={item.href} label={item.label} />
+                ) : (
+                  <DropdownAnchor key={item.href} href={homeHref(item.href)} label={item.label} />
+                ),
+              )}
+            </Dropdown>
+
+            <Dropdown label="Assessments">
+              {assessmentLinks.map((item) =>
+                item.comingSoon ? (
+                  <span
+                    key={item.label}
+                    className="flex items-center justify-between rounded-xl px-4 py-2.5 text-sm text-muted-foreground/60"
+                  >
+                    {item.label}
+                    <span className="ml-4 whitespace-nowrap text-[10px] font-medium uppercase tracking-wider text-muted-foreground/50">
+                      Coming soon
+                    </span>
                   </span>
-                </span>
-              ) : (
-                <DropdownLink key={item.href} to={item.href!} label={item.label} />
-              ),
-            )}
-          </Dropdown>
+                ) : (
+                  <DropdownLink key={item.href} to={item.href!} label={item.label} />
+                ),
+              )}
+            </Dropdown>
+
+            <a
+              href={homeHref(primaryLinks[1].href)}
+              className="rounded-full px-4 py-2 text-sm text-foreground/70 hover:text-navy hover:bg-secondary transition-colors"
+            >
+              Contact
+            </a>
+          </nav>
 
           <a
-            href={homeHref(primaryLinks[1].href)}
-            className="rounded-full px-4 py-2 text-sm text-foreground/70 hover:text-navy hover:bg-secondary transition-colors"
+            href={BOOKING_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-navy px-4 py-2 text-sm font-medium text-navy-foreground shadow-soft hover:bg-navy/90 transition-colors"
           >
-            Contact
+            Book a Business Consultation
+            <span aria-hidden>→</span>
           </a>
-        </nav>
 
-        <a
-          href={BOOKING_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-navy px-4 py-2 text-sm font-medium text-navy-foreground shadow-soft hover:bg-navy/90 transition-colors"
-        >
-          Book a Business Consultation
-          <span aria-hidden>→</span>
-        </a>
-
-        <button
-          type="button"
-          className="md:hidden grid h-10 w-10 place-items-center rounded-xl border border-border bg-card text-navy shadow-soft"
-          aria-label={mobileOpen ? "Close menu" : "Open menu"}
-          aria-expanded={mobileOpen}
-          onClick={() => setMobileOpen((open) => !open)}
-        >
-          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
-      </div>
-
-      {mobileOpen && (
-        <div className="md:hidden border-t border-border/60 bg-background/95 px-6 py-4 shadow-soft backdrop-blur-md">
-          <nav className="mx-auto flex max-w-7xl flex-col gap-1">
-            <a href={homeHref("#top")} onClick={closeMobile} className="rounded-xl px-4 py-3 text-sm text-foreground/80 hover:bg-secondary">Home</a>
-            <a href={homeHref("#about")} onClick={closeMobile} className="rounded-xl px-4 py-3 text-sm text-foreground/80 hover:bg-secondary">About Us</a>
-            <a href={homeHref("#solutions")} onClick={closeMobile} className="rounded-xl px-4 py-3 text-sm text-foreground/80 hover:bg-secondary">Solutions</a>
-            <Link to="/assessments" onClick={closeMobile} className="rounded-xl bg-secondary px-4 py-3 text-sm font-medium text-navy">Assessments</Link>
-            <a href={homeHref("#why")} onClick={closeMobile} className="rounded-xl px-4 py-3 text-sm text-foreground/80 hover:bg-secondary">Why Us</a>
-            <a href={homeHref("#industries")} onClick={closeMobile} className="rounded-xl px-4 py-3 text-sm text-foreground/80 hover:bg-secondary">Industries</a>
-            <a href={homeHref("#contact")} onClick={closeMobile} className="rounded-xl px-4 py-3 text-sm text-foreground/80 hover:bg-secondary">Contact</a>
-            <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" onClick={closeMobile} className="mt-2 inline-flex justify-center rounded-xl bg-navy px-4 py-3 text-sm font-medium text-navy-foreground">Book a Business Consultation</a>
-          </nav>
+          <button
+            type="button"
+            className="md:hidden grid h-10 w-10 place-items-center rounded-xl border border-border bg-card text-navy shadow-soft"
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
+            onClick={() => setMobileOpen((open) => !open)}
+          >
+            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
         </div>
-      )}
-    </header>
+
+        {mobileOpen && (
+          <div className="md:hidden border-t border-border/60 bg-background/95 px-6 py-4 shadow-soft backdrop-blur-md">
+            <nav className="mx-auto flex max-w-7xl flex-col gap-1">
+              <a href={homeHref("#top")} onClick={closeMobile} className="rounded-xl px-4 py-3 text-sm text-foreground/80 hover:bg-secondary">Home</a>
+              <a href={homeHref("#about")} onClick={closeMobile} className="rounded-xl px-4 py-3 text-sm text-foreground/80 hover:bg-secondary">About Us</a>
+              <a href={homeHref("#solutions")} onClick={closeMobile} className="rounded-xl px-4 py-3 text-sm text-foreground/80 hover:bg-secondary">Solutions</a>
+              <Link to="/assessments" onClick={closeMobile} className="rounded-xl bg-secondary px-4 py-3 text-sm font-medium text-navy">Assessments</Link>
+              <a href={homeHref("#why")} onClick={closeMobile} className="rounded-xl px-4 py-3 text-sm text-foreground/80 hover:bg-secondary">Why Us</a>
+              <a href={homeHref("#industries")} onClick={closeMobile} className="rounded-xl px-4 py-3 text-sm text-foreground/80 hover:bg-secondary">Industries</a>
+              <a href={homeHref("#contact")} onClick={closeMobile} className="rounded-xl px-4 py-3 text-sm text-foreground/80 hover:bg-secondary">Contact</a>
+              <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" onClick={closeMobile} className="mt-2 inline-flex justify-center rounded-xl bg-navy px-4 py-3 text-sm font-medium text-navy-foreground">Book a Business Consultation</a>
+            </nav>
+          </div>
+        )}
+      </header>
+      <HomeAssessmentExtras />
+    </>
   );
 }
 
