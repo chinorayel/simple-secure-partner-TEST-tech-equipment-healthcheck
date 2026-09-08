@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { QUESTIONS, calculateResult } from "./business-operations";
+import { saveHealthCheckLeadToGoogleSheets } from "./google-sheets.server";
 
 const submitSchema = z.object({
   customer: z.object({
@@ -32,6 +33,15 @@ export const submitBusinessOperationsHealthCheck = createServerFn({ method: "POS
 
     const result = calculateResult(cleanedAnswers);
     const apiKey = process.env.RESEND_API_KEY;
+
+    const sheets = await saveHealthCheckLeadToGoogleSheets({
+      assessment: "Business Operations Health Check",
+      customer: input.customer,
+      score: result.score,
+      result: result.label,
+      opportunities: result.opportunities,
+    });
+    if (!sheets.saved) console.warn("[health-check] Business Operations lead was not saved to Google Sheets:", sheets.reason);
 
     if (!apiKey) {
       return { ok: true as const, result, emailSent: false };
