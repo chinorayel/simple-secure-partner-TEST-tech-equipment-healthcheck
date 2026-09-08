@@ -4,6 +4,7 @@ import { z } from "zod";
 import { QUESTIONS as TECH_QUESTIONS, evaluateHealthCheck } from "./technology-equipment";
 import { QUESTIONS as NETWORK_QUESTIONS, calculateResult } from "./network-cctv";
 import { getSubmissionsStore } from "./submissions-store.server";
+import { saveHealthCheckLeadToGoogleSheets } from "./google-sheets.server";
 import {
   ADMIN_SESSION_COOKIE,
   ADMIN_SESSION_TTL_SECONDS,
@@ -131,6 +132,14 @@ export const submitTechEquipmentHealthCheck = createServerFn({ method: "POST" })
         answers: cleanedAnswers,
         consent: input.consent,
       });
+      const sheets = await saveHealthCheckLeadToGoogleSheets({
+        assessment: "Technology Equipment Health Check",
+        customer: input.customer,
+        score: submission.result.overall.score,
+        result: submission.result.overall.label,
+        opportunities: submission.result.recommendations.map((item) => item.category),
+      });
+      if (!sheets.saved) console.warn("[health-check] Technology Equipment lead was not saved to Google Sheets:", sheets.reason);
       const email = await sendHealthCheckEmail({
         assessment: "Technology Equipment Health Check",
         customer: input.customer,
@@ -155,6 +164,14 @@ export const submitNetworkCctvHealthCheck = createServerFn({ method: "POST" })
     }
     try {
       const result = calculateResult(cleanedAnswers);
+      const sheets = await saveHealthCheckLeadToGoogleSheets({
+        assessment: "Network & CCTV Health Check",
+        customer: input.customer,
+        score: result.overallScore,
+        result: result.headline,
+        opportunities: result.recommendations.map((item) => item.category),
+      });
+      if (!sheets.saved) console.warn("[health-check] Network & CCTV lead was not saved to Google Sheets:", sheets.reason);
       const email = await sendHealthCheckEmail({
         assessment: "Network & CCTV Health Check",
         customer: input.customer,
