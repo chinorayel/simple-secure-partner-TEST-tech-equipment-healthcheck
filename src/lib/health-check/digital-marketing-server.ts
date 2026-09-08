@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { QUESTIONS, calculateResult } from "./digital-marketing";
+import { saveHealthCheckLeadToGoogleSheets } from "./google-sheets.server";
 
 const submitSchema = z.object({
   customer: z.object({ businessName: z.string().trim().min(1).max(200), contactName: z.string().trim().min(1).max(200), email: z.string().trim().email().max(320), phone: z.string().trim().max(40).optional() }),
@@ -15,6 +16,16 @@ export const submitDigitalMarketingHealthCheck = createServerFn({ method: "POST"
     const cleanedAnswers: Record<string, string> = {};
     for (const [id, value] of Object.entries(input.answers)) if (validIds.has(id)) cleanedAnswers[id] = value;
     const result = calculateResult(cleanedAnswers);
+
+    const sheets = await saveHealthCheckLeadToGoogleSheets({
+      assessment: "Digital Marketing Health Check",
+      customer: input.customer,
+      score: result.score,
+      result: result.label,
+      opportunities: result.opportunities,
+    });
+    if (!sheets.saved) console.warn("[health-check] Digital Marketing lead was not saved to Google Sheets:", sheets.reason);
+
     const apiKey = process.env.RESEND_API_KEY;
     if (!apiKey) return { ok: true as const, result, emailSent: false };
     const answerRows = QUESTIONS.map((q) => {
