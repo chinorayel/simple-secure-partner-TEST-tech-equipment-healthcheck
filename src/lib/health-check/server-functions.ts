@@ -254,3 +254,5 @@ export const adminGetSubmission = createServerFn({ method: "GET" })
     if (!submission) return { ok: false, error: "NOT_FOUND" };
     return { ok: true, submission };
   });
+
+// Google Sheets connection test
