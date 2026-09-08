@@ -169,7 +169,7 @@ export const submitNetworkCctvHealthCheck = createServerFn({ method: "POST" })
         customer: input.customer,
         score: result.overallScore,
         result: result.headline,
-        opportunities: result.recommendations.map((item) => item.category),
+        opportunities: result.recommendations,
       });
       if (!sheets.saved) console.warn("[health-check] Network & CCTV lead was not saved to Google Sheets:", sheets.reason);
       const email = await sendHealthCheckEmail({
