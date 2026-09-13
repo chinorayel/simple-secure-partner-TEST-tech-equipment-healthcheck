@@ -139,14 +139,23 @@ export const submitTechEquipmentHealthCheck = createServerFn({ method: "POST" })
         opportunities: result.recommendations.map((item) => item.category),
       });
       if (!sheets.saved) console.warn("[health-check] Technology Equipment lead was not saved to Google Sheets:", sheets.reason);
-      const email = await sendHealthCheckEmail({
-        assessment: "Technology Equipment Health Check",
-        customer: input.customer,
-        answers: cleanedAnswers,
-        result,
-        questionSet: TECH_QUESTIONS,
-      });
-      return { ok: true as const, result, emailSent: email.sent };
+
+      let emailSent = false;
+      try {
+        const email = await sendHealthCheckEmail({
+          assessment: "Technology Equipment Health Check",
+          customer: input.customer,
+          answers: cleanedAnswers,
+          result,
+          questionSet: TECH_QUESTIONS,
+        });
+        emailSent = email.sent;
+        if (!email.sent) console.warn("[health-check] Technology Equipment email was not sent:", email.reason);
+      } catch (err) {
+        console.error("[health-check] Technology Equipment email exception:", err);
+      }
+
+      return { ok: true as const, result, emailSent };
     } catch (err) {
       console.error("[health-check] submission failed:", err);
       return { ok: false as const, error: "We couldn't submit your assessment right now. Please try again." };
