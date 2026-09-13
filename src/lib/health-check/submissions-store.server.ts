@@ -55,8 +55,6 @@ async function readAll(): Promise<StoredSubmission[]> {
     if (err && typeof err === "object" && "code" in err && err.code === "ENOENT") {
       return [];
     }
-    // Corrupt file: don't crash submissions over it, but don't pretend
-    // there's nothing there either — surface it in server logs.
     console.error("[health-check] failed to read submissions file:", err);
     return [];
   }
@@ -64,8 +62,6 @@ async function readAll(): Promise<StoredSubmission[]> {
 
 async function writeAll(submissions: StoredSubmission[]): Promise<void> {
   await mkdir(DATA_DIR, { recursive: true });
-  // Write to a temp file then rename, so a crash mid-write can't corrupt
-  // the store for every submission that comes after it.
   const tmpFile = `${DATA_FILE}.tmp-${randomUUID()}`;
   await writeFile(tmpFile, JSON.stringify(submissions, null, 2), "utf-8");
   const { rename } = await import("node:fs/promises");
@@ -95,7 +91,14 @@ class FileSubmissionsStore implements SubmissionsStore {
 
     const all = await readAll();
     all.push(submission);
-    await writeAll(all);
+    try {
+      await writeAll(all);
+    } catch (err) {
+      // Vercel/serverless deployments may use an ephemeral or read-only
+      // filesystem. The submission's durable destinations (Google Sheets
+      // and email) must still run even when this TEST-only local store cannot.
+      console.warn("[health-check] local submission store unavailable; continuing with Sheets/email:", err);
+    }
 
     return submission;
   }
