@@ -224,16 +224,16 @@ export function TechEquipmentHealthCheckWidget() {
               relies on. Answer at your own pace — there are no wrong answers, and "not sure" is a
               perfectly useful response.
             </p>
-            <ul className="mt-6 space-y-2 text-sm text-foreground/80">
-              <li className="flex items-center justify-center gap-2 sm:justify-start">
+            <ul className="mx-auto mt-6 w-fit space-y-2 text-sm text-foreground/80 sm:mx-0">
+              <li className="flex items-center justify-start gap-2">
                 <CheckCircle2 className="h-4 w-4 shrink-0 text-copper" aria-hidden />
                 Takes about 3 minutes
               </li>
-              <li className="flex items-center justify-center gap-2 sm:justify-start">
+              <li className="flex items-center justify-start gap-2">
                 <CheckCircle2 className="h-4 w-4 shrink-0 text-copper" aria-hidden />
                 Instant, practical results
               </li>
-              <li className="flex items-center justify-center gap-2 sm:justify-start">
+              <li className="flex items-center justify-start gap-2">
                 <CheckCircle2 className="h-4 w-4 shrink-0 text-copper" aria-hidden />
                 No obligation
               </li>
