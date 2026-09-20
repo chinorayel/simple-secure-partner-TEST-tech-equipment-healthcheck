@@ -83,10 +83,12 @@ function HealthCheckForm() {
         },
       });
       if (!response.ok) {
+        console.error("[health-check] Technology Equipment assessment submission failed:", response.error);
         setSubmitError(response.error);
         return;
       }
-    } catch {
+    } catch (err) {
+      console.error("[health-check] Technology Equipment assessment submission exception:", err);
       setSubmitError("We couldn't submit your assessment right now. Please try again.");
       return;
     }
