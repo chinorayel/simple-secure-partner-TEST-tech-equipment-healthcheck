@@ -8,6 +8,7 @@ import {
   saveSubmission,
   type AnswerMap,
 } from "@/lib/health-check/technology-equipment";
+import { submitTechEquipmentHealthCheck } from "@/lib/health-check/server-functions";
 
 export const Route = createFileRoute("/health-check/technology-equipment/")({
   head: () => ({
@@ -62,8 +63,34 @@ function HealthCheckForm() {
       };
     });
 
-  const onSubmit = (e: React.FormEvent) => {
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!businessName.trim() || !contactName.trim() || !email.trim()) return;
+    setSubmitError(null);
+    try {
+      const response = await submitTechEquipmentHealthCheck({
+        data: {
+          customer: {
+            businessName: businessName.trim(),
+            contactName: contactName.trim(),
+            email: email.trim(),
+            phone: phone.trim() || undefined,
+          },
+          answers: answers as Record<string, string | string[]>,
+          consent: true,
+        },
+      });
+      if (!response.ok) {
+        setSubmitError(response.error);
+        return;
+      }
+    } catch {
+      setSubmitError("We couldn't submit your assessment right now. Please try again.");
+      return;
+    }
+
     saveSubmission({
       assessment: "technology-equipment",
       businessName: businessName.trim(),
@@ -171,6 +198,12 @@ function HealthCheckForm() {
                 </div>
               </fieldset>
             ))}
+
+            {submitError && (
+              <div className="rounded-2xl border border-danger/20 bg-danger/5 p-4 text-sm text-danger">
+                {submitError}
+              </div>
+            )}
 
             <div className="sticky bottom-4 rounded-2xl border border-border bg-card/95 p-4 shadow-elevated backdrop-blur">
               <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-between">
