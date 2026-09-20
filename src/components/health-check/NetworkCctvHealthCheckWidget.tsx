@@ -185,7 +185,7 @@ export function NetworkCctvHealthCheckWidget() {
                     </span>
                     <div>
                       <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-copper">{currentQuestion.area === "connectivity" ? "Internet & Connectivity" : currentQuestion.area === "reliability" ? "Network Reliability & Power" : currentQuestion.area === "cctv" ? "CCTV & Security" : "Upgrade Readiness"}</p>
-                      <h3 className="mt-2 font-display text-2xl leading-tight text-navy sm:text-3xl">{currentQuestion.label}</h3>
+                      <h3 className="mt-2 font-display text-[15px] font-semibold leading-snug text-navy sm:text-base">{currentQuestion.label}</h3>
                       {currentQuestion.helper && <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{currentQuestion.helper}</p>}
                     </div>
                   </div>
@@ -208,7 +208,7 @@ export function NetworkCctvHealthCheckWidget() {
                     <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-navy text-navy-foreground shadow-soft"><CheckCircle2 className="h-5 w-5" /></span>
                     <div>
                       <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-copper">Final step</p>
-                      <h3 className="mt-2 font-display text-2xl leading-tight text-navy sm:text-3xl">Where should we send your results?</h3>
+                      <h3 className="mt-2 font-display text-[15px] font-semibold leading-snug text-navy sm:text-base">Where should we send your results?</h3>
                       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">A few details help us identify your assessment and prepare useful next steps.</p>
                     </div>
                   </div>
