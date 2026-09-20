@@ -89,7 +89,12 @@ function HealthCheckForm() {
       }
     } catch (err) {
       console.error("[health-check] Technology Equipment assessment submission exception:", err);
-      setSubmitError("We couldn't submit your assessment right now. Please try again.");
+      const detail = err instanceof Error ? err.message : String(err);
+      setSubmitError(
+        detail
+          ? `Submission error: ${detail}`
+          : "We couldn't submit your assessment right now. Please try again.",
+      );
       return;
     }
 
