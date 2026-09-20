@@ -139,6 +139,7 @@ export const submitTechEquipmentHealthCheck = createServerFn({ method: "POST" })
       }
 
       let emailSent = false;
+      let emailReason: string | undefined;
       try {
         const email = await sendHealthCheckEmail({
           assessment: "Technology Equipment Health Check",
@@ -148,8 +149,10 @@ export const submitTechEquipmentHealthCheck = createServerFn({ method: "POST" })
           questionSet: TECH_QUESTIONS,
         });
         emailSent = email.sent;
+        emailReason = email.sent ? undefined : email.reason;
         if (!email.sent) console.warn("[health-check] Technology Equipment email was not sent:", email.reason);
       } catch (err) {
+        emailReason = err instanceof Error ? err.message : String(err);
         console.error("[health-check] Technology Equipment email exception:", err);
       }
 
@@ -157,6 +160,7 @@ export const submitTechEquipmentHealthCheck = createServerFn({ method: "POST" })
         ok: true as const,
         result,
         emailSent,
+        emailReason,
         sheetsSaved: sheets.saved,
         sheetsReason: sheets.saved ? undefined : sheets.reason,
       };
