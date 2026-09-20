@@ -136,6 +136,11 @@ export function TechEquipmentHealthCheckWidget() {
       });
       if (res.ok) {
         setSubmissionId(res.id);
+        if (res.sheetsSaved === false) {
+          setPersistError(
+            `TEST diagnostic — Google Sheets was not confirmed saved: ${res.sheetsReason || "unknown webhook response"}`,
+          );
+        }
       } else {
         setPersistError(res.error || "We couldn't save your submission right now.");
       }
