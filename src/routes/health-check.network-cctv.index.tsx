@@ -4,6 +4,7 @@ import { ArrowRight, Camera, ClipboardList, Wifi } from "lucide-react";
 import { Nav } from "@/components/site/Nav";
 import { PCBLines } from "@/components/site/PCBLines";
 import { QUESTIONS, saveSubmission, type AnswerMap } from "@/lib/health-check/network-cctv";
+import { submitNetworkCctvHealthCheck } from "@/lib/health-check/server-functions";
 
 export const Route = createFileRoute("/health-check/network-cctv/")({
   head: () => ({
@@ -35,8 +36,34 @@ function NetworkCctvHealthCheck() {
 
   const setAnswer = (id: string, value: string) => setAnswers((prev) => ({ ...prev, [id]: value }));
 
-  const onSubmit = (e: React.FormEvent) => {
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!businessName.trim() || !contactName.trim() || !email.trim()) return;
+    setSubmitError(null);
+    try {
+      const response = await submitNetworkCctvHealthCheck({
+        data: {
+          customer: {
+            businessName: businessName.trim(),
+            contactName: contactName.trim(),
+            email: email.trim(),
+            phone: phone.trim() || undefined,
+          },
+          provider: provider.trim() || undefined,
+          answers: answers as Record<string, string>,
+        },
+      });
+      if (!response.ok) {
+        setSubmitError(response.error);
+        return;
+      }
+    } catch {
+      setSubmitError("We couldn't submit your assessment right now. Please try again.");
+      return;
+    }
+
     saveSubmission({
       assessment: "network-cctv",
       businessName: businessName.trim(),
@@ -104,6 +131,12 @@ function NetworkCctvHealthCheck() {
             {visibleQuestions.filter((q) => q.area === "planning").map((q, i) => (
               <QuestionCard key={q.id} q={q} index={i + 1} value={answers[q.id]} onChange={setAnswer} provider={provider} setProvider={setProvider} />
             ))}
+
+            {submitError && (
+              <div className="rounded-xl border border-danger/20 bg-danger/5 p-4 text-sm text-danger">
+                {submitError}
+              </div>
+            )}
 
             <div className="sticky bottom-4 rounded-2xl border border-border bg-card/95 p-4 shadow-elevated backdrop-blur">
               <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-between">
