@@ -125,32 +125,38 @@ export const submitTechEquipmentHealthCheck = createServerFn({ method: "POST" })
       if (validIds.has(id)) cleanedAnswers[id] = value;
     }
 
-    const store = getSubmissionsStore();
     try {
-      const submission = await store.create({
-        customer: input.customer,
-        answers: cleanedAnswers,
-        consent: input.consent,
-      });
+      const result = evaluateHealthCheck(cleanedAnswers);
       const sheets = await saveHealthCheckLeadToGoogleSheets({
         assessment: "Technology Equipment Health Check",
         customer: input.customer,
-        score: submission.result.overall.score,
-        result: submission.result.overall.label,
-        opportunities: submission.result.recommendations.map((item) => item.category),
+        score: result.overall.score,
+        result: result.overall.label,
+        opportunities: result.recommendations.map((item) => item.category),
       });
-      if (!sheets.saved) console.warn("[health-check] Technology Equipment lead was not saved to Google Sheets:", sheets.reason);
-      const email = await sendHealthCheckEmail({
-        assessment: "Technology Equipment Health Check",
-        customer: input.customer,
-        answers: cleanedAnswers,
-        result: submission.result,
-        questionSet: TECH_QUESTIONS,
-      });
-      return { ok: true as const, id: submission.id, result: submission.result, emailSent: email.sent };
+      if (!sheets.saved) {
+        console.warn("[health-check] Technology Equipment lead was not saved to Google Sheets:", sheets.reason);
+      }
+
+      let emailSent = false;
+      try {
+        const email = await sendHealthCheckEmail({
+          assessment: "Technology Equipment Health Check",
+          customer: input.customer,
+          answers: cleanedAnswers,
+          result,
+          questionSet: TECH_QUESTIONS,
+        });
+        emailSent = email.sent;
+        if (!email.sent) console.warn("[health-check] Technology Equipment email was not sent:", email.reason);
+      } catch (err) {
+        console.error("[health-check] Technology Equipment email exception:", err);
+      }
+
+      return { ok: true as const, result, emailSent };
     } catch (err) {
       console.error("[health-check] submission failed:", err);
-      return { ok: false as const, error: "We couldn't save your submission right now. Please try again." };
+      return { ok: false as const, error: "We couldn't submit your assessment right now. Please try again." };
     }
   });
 
