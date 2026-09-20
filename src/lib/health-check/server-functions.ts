@@ -153,7 +153,13 @@ export const submitTechEquipmentHealthCheck = createServerFn({ method: "POST" })
         console.error("[health-check] Technology Equipment email exception:", err);
       }
 
-      return { ok: true as const, result, emailSent };
+      return {
+        ok: true as const,
+        result,
+        emailSent,
+        sheetsSaved: sheets.saved,
+        sheetsReason: sheets.saved ? undefined : sheets.reason,
+      };
     } catch (err) {
       console.error("[health-check] submission failed:", err);
       return { ok: false as const, error: "We couldn't submit your assessment right now. Please try again." };
